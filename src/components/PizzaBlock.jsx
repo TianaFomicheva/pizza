@@ -1,12 +1,16 @@
 import React from 'react'
+import ClassNames from 'classnames'
 
 function PizzaBlock({name, types, sizes, prices, imageUrl}) {
     const typeNames = ['тонкое', 'традиционное']
     const Sizes = ['26', '30', '40']
+    const doughOver = 10
+
+    const initialPrice = types[0] === 0 ? prices[Sizes.indexOf(sizes[0].toString())] : prices[Sizes.indexOf(sizes[0].toString())] + doughOver
     const [activeType, setActiveType ] = React.useState(types[0]);
     const [activeSize, setActiveSize ] = React.useState(sizes[0]);
-    const [activePrice, setActivePrice ] = React.useState(prices[types[0]]);
-    const doughOver = 10;
+    const [activePrice, setActivePrice ] = React.useState(initialPrice);
+
 
     const onSelectType = (index)=>{
         console.log(types[index])
@@ -14,9 +18,10 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
         setActivePrice((index === 1) ? activePrice  + doughOver :  activePrice - doughOver )
 
     }
-    const onSelectSize = (index)=>{
-        setActiveSize(sizes[index]);
-        setActivePrice(prices[index] + (activeType === 1 ? doughOver : 0))
+    const onSelectSize = (size)=>{
+        console.log(typeof(size))
+        setActiveSize(size);
+        setActivePrice(prices[sizes.indexOf(parseInt(size))] + (activeType === 1 ? doughOver : 0))
     }
     return (
         <div className="pizza-block">
@@ -28,10 +33,16 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
                     <h4 className="pizza-block__title">{name}</h4>
                     <div className="pizza-block__selector">
                         <ul>
-                            {typeNames.map((obj, index)=>(<li className={((activeType) === index) ? 'active' : ''} onClick={ ()=>{(activeType !== index) && onSelectType(index)}} key={index}>{obj} тесто</li>))}                            
+                            {typeNames.map((type, index)=>(<li className={ClassNames({
+                                active: activeType === index,
+                                disabled: !types.includes(index)
+                            })} onClick={ ()=>{(activeType !== index) && onSelectType(index)}} key={index}>{type} тесто</li>))}                            
                         </ul>
                         <ul>
-                        {Sizes.map((obj, index)=>(<li className={((activeSize) === sizes[index]) ? 'active' : ''} onClick={()=>{((activeSize) !== sizes[index]) &&  onSelectSize(index)}}  key={index}>{obj} см.</li>))}  
+                        {Sizes.map((size, index)=>(<li className={ClassNames({
+                            active: activeSize === sizes[index],
+                            disabled: !sizes.includes(parseInt(size))
+                        })} onClick={()=>{((activeSize) !== sizes[index]) &&  onSelectSize(size)}}  key={index}>{size} см.</li>))}  
                         </ul>
                     </div>
                     <div className="pizza-block__bottom">
