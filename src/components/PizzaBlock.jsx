@@ -1,7 +1,7 @@
 import React from 'react'
 import ClassNames from 'classnames'
 
-function PizzaBlock({name, types, sizes, prices, imageUrl}) {
+function PizzaBlock({name, types, sizes, prices, imageUrl, onSendToCart}) {
     const typeNames = ['тонкое', 'традиционное']
     const Sizes = ['26', '30', '40']
     const doughOver = 10
@@ -20,6 +20,17 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
     const onSelectSize = (size)=>{
         setActiveSize(size);
         setActivePrice(prices[sizes.indexOf(parseInt(size))] + (activeType === 1 ? doughOver : 0))
+    }
+    const onAddToCart = ()=>{
+        const obj = {
+            id, 
+            name,
+            imageUrl,
+            size: activeSize,
+            type: activeType,
+            price: activePrice
+        }
+        onSendToCart(obj)
     }
     return (
         <div className="pizza-block">
@@ -58,7 +69,7 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
                                     fill="white"
                                 />
                             </svg>
-                            <span>Добавить</span>
+                            <span onClick={onAddToCart}>Добавить</span>
                             <i>2</i>
                         </div>
                     </div>

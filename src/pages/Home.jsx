@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import SortPopup from '../components/SortPopup'
 import Categories from '../components/Categories'
 import {setSortBy} from '../redux/actions/filters'
+import {addItemToCart} from '../redux/actions/cart'
 
 function Home() {
   const dispatch = useDispatch()
@@ -13,11 +14,13 @@ function Home() {
   
     const [pizzas, setPizzas ] = React.useState(null);
     const SelectByType =          React.useCallback((type)=>{
-      alert(1)
+
         dispatch(setSortBy(type))
       },[])
     
- 
+ const sendToCart = (obj)=>{
+   dispatch(addItemToCart(obj))
+ }
 
     React.useEffect(()=>{axios.get(`/db.json`).then(({data})=>{setPizzas(data.pizzas)
     })
@@ -33,7 +36,7 @@ function Home() {
             <div className="content__items">
             {
       pizzas && (
-        pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj}/>)
+        pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj} onSendToCart={sendToCart}/>)
       )
     }
             </div>
