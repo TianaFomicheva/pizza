@@ -19,6 +19,46 @@
             "prices": [245,340],
             "category": 1,
             "rating": 6
+          },
+          {
+            "id": 2,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/6652fec1-04df-49d8-8744-232f1032c44b.jpg",
+            "name": "Цыпленок барбекю",
+            "types": [0],
+            "sizes": [26, 40],
+            "prices": [295, 380],
+            "category": 1,
+            "rating": 4
+          },
+          {
+            "id": 3,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/af553bf5-3887-4501-b88e-8f0f55229429.jpg",
+            "name": "Кисло-сладкий цыпленок",
+            "types": [1],
+            "sizes": [26, 30, 40],
+            "prices": [275, 315, 375],
+            "category": 2,
+            "rating": 2
+          },
+          {
+            "id": 4,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+            "name": "Чизбургер-пицца",
+            "types": [0, 1],
+            "sizes": [26, 30, 40],
+            "prices": [415, 460, 525],
+            "category": 3,
+            "rating": 8
+          },
+          {
+            "id": 5,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/1e1a6e80-b3ba-4a44-b6b9-beae5b1fbf27.jpg",
+            "name": "Крэйзи пепперони",
+            "types": [0],
+            "sizes": [30, 40],
+            "prices": [580, 620],
+            "category": 2,
+            "rating": 2
           }
     ]
 }

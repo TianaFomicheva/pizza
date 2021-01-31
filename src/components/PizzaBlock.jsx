@@ -13,13 +13,11 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
 
 
     const onSelectType = (index)=>{
-        console.log(types[index])
         setActiveType(types[index])
         setActivePrice((index === 1) ? activePrice  + doughOver :  activePrice - doughOver )
 
     }
     const onSelectSize = (size)=>{
-        console.log(typeof(size))
         setActiveSize(size);
         setActivePrice(prices[sizes.indexOf(parseInt(size))] + (activeType === 1 ? doughOver : 0))
     }
@@ -40,7 +38,7 @@ function PizzaBlock({name, types, sizes, prices, imageUrl}) {
                         </ul>
                         <ul>
                         {Sizes.map((size, index)=>(<li className={ClassNames({
-                            active: activeSize === sizes[index],
+                            active: activeSize === size,
                             disabled: !sizes.includes(parseInt(size))
                         })} onClick={()=>{((activeSize) !== sizes[index]) &&  onSelectSize(size)}}  key={index}>{size} см.</li>))}  
                         </ul>
