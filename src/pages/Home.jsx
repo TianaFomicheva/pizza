@@ -19,6 +19,7 @@ function Home() {
       },[])
     
  const sendToCart = (obj)=>{
+   
    dispatch(addItemToCart(obj))
  }
 

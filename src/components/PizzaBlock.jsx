@@ -1,7 +1,7 @@
 import React from 'react'
 import ClassNames from 'classnames'
 
-function PizzaBlock({name, types, sizes, prices, imageUrl, onSendToCart}) {
+function PizzaBlock({id, name, types, sizes, prices, imageUrl, onSendToCart}) {
     const typeNames = ['тонкое', 'традиционное']
     const Sizes = ['26', '30', '40']
     const doughOver = 10
@@ -28,7 +28,8 @@ function PizzaBlock({name, types, sizes, prices, imageUrl, onSendToCart}) {
             imageUrl,
             size: activeSize,
             type: activeType,
-            price: activePrice
+            price: activePrice,
+            uniq: `${id}_${activeType}_${activeSize}`
         }
         onSendToCart(obj)
     }
