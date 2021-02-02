@@ -2,11 +2,11 @@
 
 import Button from './Button'
 import {Link} from 'react-router-dom'
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 function Header(){
-  // const {totalPrice, totalCount} = useSelector(({cart})=>cart)
+  const {totalPrice, totalCount} = useSelector(({cart})=>cart)
     return(
         <div className="header">
         <div className="container">
@@ -22,7 +22,7 @@ function Header(){
           <div className="header__cart">
             <Link to="/cart">
           <Button className="button--cart" >
-          {/* <span>{totalPrice} ₽</span> */}
+          <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -53,7 +53,7 @@ function Header(){
                   strokeLinejoin="round"
                 />
               </svg>
-              {/* <span>{totalCount}</span> */}
+              <span>{totalCount}</span>
           
           </Button>
           </Link>

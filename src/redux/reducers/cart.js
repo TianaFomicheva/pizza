@@ -25,7 +25,7 @@ const cart = (state = initialState, action)=>{
                 totalCount: Object.values(actualItems).reduce((sum, obj) => obj.items.length + sum, 0)
 
             }
-        console.log(res)
+        // console.log(res)
             return res
     
         default:
