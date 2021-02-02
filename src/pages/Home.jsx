@@ -11,7 +11,8 @@ function Home() {
   const dispatch = useDispatch()
   const categoryNames = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
   const sortItems = [{name: 'Популярности', type: 'rating', order: 'desc'}, {name: 'Цене', type: 'prices', order: 'asc'}, {name: 'Алфавиту', type: 'name', order: 'asc'}]
-  
+  const {groupedItems} = useSelector(({cart})=>cart)
+  console.log(groupedItems)
     const [pizzas, setPizzas ] = React.useState(null);
     const SelectByType =          React.useCallback((type)=>{
 
@@ -37,7 +38,7 @@ function Home() {
             <div className="content__items">
             {
       pizzas && (
-        pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj} onSendToCart={sendToCart}/>)
+        pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj} onSendToCart={sendToCart}  addedCount={groupedItems[obj.id] && groupedItems[obj.id].groupedItems.length}/>)
       )
     }
             </div>

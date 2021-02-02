@@ -1,7 +1,7 @@
 import React from 'react'
 import ClassNames from 'classnames'
 
-function PizzaBlock({id, name, types, sizes, prices, imageUrl, onSendToCart}) {
+function PizzaBlock({id, name, types, sizes, prices, imageUrl, onSendToCart, addedCount}) {
     const typeNames = ['тонкое', 'традиционное']
     const Sizes = ['26', '30', '40']
     const doughOver = 10
@@ -71,7 +71,7 @@ function PizzaBlock({id, name, types, sizes, prices, imageUrl, onSendToCart}) {
                                 />
                             </svg>
                             <span onClick={onAddToCart}>Добавить</span>
-                            <i>2</i>
+                            {addedCount &&<i>{addedCount}</i>}
                         </div>
                     </div>
                 </div>
