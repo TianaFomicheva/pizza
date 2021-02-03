@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Categories({items}) {
+function Categories({items, activeCategory, onClickCategory}) {
     return (
         <div>
            <div className="categories">
               <ul>
-                <li >Все</li>
-                {items.map((item, index)=><li key={index}>{item}</li>)}
+                <li onClick={()=>onClickCategory(null)} className={activeCategory === null ? 'active' : ''}>Все</li>
+                {items.map((item, index)=><li key={index} onClick={()=>onClickCategory(index)} className={activeCategory === index ? 'active' : ''}>{item}</li>)}
                 
               </ul>
             </div> 

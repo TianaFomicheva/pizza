@@ -36,7 +36,7 @@ const sortItems = [{name:'популярности', type:'rating', order: 'desc
     return (
         <div className="container">
            <div className="content__top">
-           <Categories items={categoryNames}/>
+           <Categories activeCategory={category}  items={categoryNames} onClickCategory={onSelectCategory}/>
              <SortPopup items={sortItems} onClickSortType={onSelectSortType} />
            </div>
             <h2 className="content__title">Все пиццы</h2>
