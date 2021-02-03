@@ -26,3 +26,7 @@ export const removeCartItem = (id, uniq) => ({
         uniq: uniq
     }
   });
+export const clearCart = () => ({
+    type: 'CLEAR_CART'
+    
+  });

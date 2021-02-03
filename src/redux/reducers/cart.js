@@ -152,10 +152,11 @@ const cart = (state = initialState, action)=>{
                   totalPrice: Object.values(newItems).reduce((sum, obj) => obj.totalPrice + sum, 0),
                 };
 
-console.log(removedState)
 
                 return removedState
               }
+              case 'CLEAR_CART':
+      return { totalPrice: 0, totalCount: 0, items: {}, groupedItems: {} }
 
         default:
             return state

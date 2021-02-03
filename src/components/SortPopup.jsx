@@ -1,12 +1,24 @@
 import React from 'react'
 
-function SortPopup({items, onSelectByType}) {
-
+function SortPopup({items, onClickSortType}) {
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
   const SortType = (type)=>{
     if(onSelectByType){
     onSelectByType(type)
     }
   }
+  const toggleVisibility = () => {
+    setVisiblePopup(!visiblePopup);
+  };
+
+  const onSelectItem = (index) => {
+    
+    if (onClickSortType) {
+      
+      onClickSortType(index);
+    }
+    setVisiblePopup(false);
+  };
     return (
         <div  className="sort">
           <div className="sort__label">
@@ -22,13 +34,13 @@ function SortPopup({items, onSelectByType}) {
                 fill="#2C2C2C"
               />
             </svg>
-            <b>Сортировка по:</b>
+            <b onClick={toggleVisibility} >Сортировка по:</b>
             <span></span>
           </div>
           {(
             <div className="sort__popup">
               <ul>
-                {items.map((item, index)=><li onClick={()=>SortType(item)} key={index}>{item.name}</li>)}
+                {visiblePopup && items.map((item, index)=><li onClick={()=>onSelectItem(item)} key={index} >{item.name}</li>)}
               </ul>
             </div>
           )}
