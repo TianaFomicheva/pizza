@@ -41,9 +41,48 @@ const cart = (state = initialState, action)=>{
                 totalCount: Object.values(actualItems).reduce((sum, obj) => obj.items.length + sum, 0)
 
             }
-        console.log(res)
+        
             return res
-    
+            
+              case 'PLUS_CART_ITEM': {
+                const newObjItems = [
+                  ...state.items[action.payload.uniq].items,
+                  state.items[action.payload.uniq].items[0],
+                ];
+               
+                const newItems = {
+                  ...state.items,
+                  [action.payload.uniq]: {
+                    items: newObjItems,
+                    totalPrice: Object.values(newObjItems).reduce((sum, obj) => obj.price + sum, 0),
+                  },
+                };
+
+                const newObjGroupedItems = [
+                  ...state.groupedItems[action.payload.id].groupedItems,
+                  state.groupedItems[action.payload.id].groupedItems[0],
+                ];
+               
+                console.log(newObjGroupedItems)
+                const newGroupedItems = {
+                  ...state.groupedItems,
+                  [action.payload.id]: {
+                    groupedItems: newObjGroupedItems,
+                    totalPrice: Object.values(newObjItems).reduce((sum, obj) => obj.price + sum, 0),
+                  },
+                };
+          
+                
+          
+                return {
+                  ...state,
+                  items: newItems,
+                  groupedItems: newGroupedItems,
+                  totalPrice: Object.values(newItems).reduce((sum, obj) => obj.totalPrice + sum, 0),
+                  totalCount: Object.values(newItems).reduce((sum, obj) => obj.items.length + sum, 0)
+
+                };
+              }
         default:
             return state
     }
