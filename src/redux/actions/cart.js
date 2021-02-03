@@ -19,3 +19,10 @@ export const minusCartItem = (id, uniq) => ({
         uniq: uniq
     }
   });
+export const removeCartItem = (id, uniq) => ({
+    type: 'REMOVE_CART_ITEM',
+    payload: {
+        id: id,
+        uniq: uniq
+    }
+  });

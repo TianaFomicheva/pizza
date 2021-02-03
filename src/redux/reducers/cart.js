@@ -116,6 +116,47 @@ const cart = (state = initialState, action)=>{
                   totalPrice: Object.values(newItems).reduce((sum, obj) => obj.totalPrice + sum, 0),
                 };
               }
+
+
+              case 'REMOVE_CART_ITEM': {
+                const newItems = {
+                  ...state.items,
+                };
+                
+                let toDeleteUniqLength =  newItems[action.payload.uniq].items.length 
+                console.log(toDeleteUniqLength)
+                console.log(state.groupedItems[action.payload.id].groupedItems)
+                const newObjGroupedItems =      toDeleteUniqLength <  state.groupedItems[action.payload.id].groupedItems.length ?
+                  state.groupedItems[action.payload.id].groupedItems.slice(parseInt(toDeleteUniqLength)) : false
+
+                console.log(newObjGroupedItems)  
+             
+                delete newItems[action.payload.uniq];
+                
+                
+                const newGroupedItems = {
+                  ...state.groupedItems,
+                  [action.payload.id]: {
+                    groupedItems: newObjGroupedItems,
+                    totalPrice: Object.values(newObjGroupedItems).reduce((sum, obj) => obj.price + sum, 0),
+                  },
+                };
+                if(!newObjGroupedItems){
+                  delete newGroupedItems[action.payload.id];
+                }
+                const removedState = {
+                  ...state,
+                  items: newItems,
+                  groupedItems:  newGroupedItems,
+                  totalCount: Object.values(newItems).reduce((sum, obj) => obj.items.length + sum, 0),
+                  totalPrice: Object.values(newItems).reduce((sum, obj) => obj.totalPrice + sum, 0),
+                };
+
+console.log(removedState)
+
+                return removedState
+              }
+
         default:
             return state
     }
