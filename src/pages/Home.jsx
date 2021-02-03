@@ -12,7 +12,6 @@ function Home() {
   const categoryNames = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
   const sortItems = [{name: 'Популярности', type: 'rating', order: 'desc'}, {name: 'Цене', type: 'prices', order: 'asc'}, {name: 'Алфавиту', type: 'name', order: 'asc'}]
   const {groupedItems} = useSelector(({cart})=>cart)
-  console.log(groupedItems)
     const [pizzas, setPizzas ] = React.useState(null);
     const SelectByType =          React.useCallback((type)=>{
 

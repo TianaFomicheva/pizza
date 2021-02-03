@@ -2,13 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import CartItem from '../components/CartItem'
-import {plusCartItem} from '../redux/actions/cart'
+import {plusCartItem, minusCartItem} from '../redux/actions/cart'
 
 function Cart() {
   const dispatch = useDispatch()
   const { totalCount, totalPrice, items } = useSelector(({ cart }) => cart)
   const onPlusItem = (id, uniq) =>{    
     dispatch(plusCartItem(id,uniq))
+  }
+  const onMinusItem = (id, uniq) =>{    
+    dispatch(minusCartItem(id,uniq))
   }
   return (
     <div className="content">
@@ -17,7 +20,7 @@ function Cart() {
         <div  className="cart">
           <div className="content__items">
             { Object.values(items).map(item => <CartItem name={item['items'][0].name} size={item['items'][0].size} id={item['items'][0].id} uniq={item['items'][0].uniq} imageUrl={item['items'][0].imageUrl} key={item['items'][0].uniq} totalCount={item['items'].length} totalPrice={item.totalPrice}  onPlus={onPlusItem}
-                                />)}
+             onMinus={onMinusItem}                   />)}
           </div>
           
           <div className="cart__bottom">

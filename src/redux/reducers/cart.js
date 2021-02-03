@@ -83,6 +83,39 @@ const cart = (state = initialState, action)=>{
 
                 };
               }
+              case 'MINUS_CART_ITEM': {
+                const oldItems = state.items[action.payload.uniq].items;
+                const newObjItems =
+                  oldItems.length > 1 ? state.items[action.payload.uniq].items.slice(1) : oldItems;
+                const newItems = {
+                  ...state.items,
+                  [action.payload.uniq]: {
+                    items: newObjItems,
+                    totalPrice: Object.values(newObjItems).reduce((sum, obj) => obj.price + sum, 0),
+                  },
+                };
+          
+                const oldGroupedItems = state.groupedItems[action.payload.id].groupedItems;
+                const newObjGroupedItems =
+                  oldGroupedItems.length > 1 ? state.groupedItems[action.payload.id].groupedItems.slice(1) : oldGroupedItems;
+                const newGroupedItems = {
+                  ...state.groupedItems,
+                  [action.payload.id]: {
+                    groupedItems: newObjGroupedItems,
+                    totalPrice: Object.values(newObjGroupedItems).reduce((sum, obj) => obj.price + sum, 0),
+                  },
+                };
+          
+                
+          
+                return {
+                  ...state,
+                  items: newItems,
+                  groupedItems: newGroupedItems, 
+                  totalCount: Object.values(newItems).reduce((sum, obj) => obj.items.length + sum, 0),
+                  totalPrice: Object.values(newItems).reduce((sum, obj) => obj.totalPrice + sum, 0),
+                };
+              }
         default:
             return state
     }

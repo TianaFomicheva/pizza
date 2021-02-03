@@ -11,3 +11,11 @@ export const plusCartItem = (id, uniq) => ({
         uniq: uniq
     }
   });
+
+export const minusCartItem = (id, uniq) => ({
+    type: 'MINUS_CART_ITEM',
+    payload: {
+        id: id,
+        uniq: uniq
+    }
+  });
