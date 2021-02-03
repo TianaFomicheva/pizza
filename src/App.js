@@ -5,7 +5,10 @@ import Cart from './pages/Cart';
 // import logo from './logo.svg';
 import {Route} from 'react-router-dom'
 import './App.css';
-
+import { createStore } from 'redux';
+import {connect} from 'react-redux'
+import store from'./redux/store'
+import {useDispatch} from 'react-redux'
 
 function App() {
  

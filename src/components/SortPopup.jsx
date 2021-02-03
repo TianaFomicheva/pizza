@@ -2,11 +2,7 @@ import React from 'react'
 
 function SortPopup({items, onClickSortType}) {
   const [visiblePopup, setVisiblePopup] = React.useState(false);
-  const SortType = (type)=>{
-    if(onSelectByType){
-    onSelectByType(type)
-    }
-  }
+  
   const toggleVisibility = () => {
     setVisiblePopup(!visiblePopup);
   };

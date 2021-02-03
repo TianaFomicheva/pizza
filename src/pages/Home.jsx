@@ -4,18 +4,25 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import SortPopup from '../components/SortPopup'
 import Categories from '../components/Categories'
-import {setSortBy} from '../redux/actions/filters'
+import {setSortBy, setCategory} from '../redux/actions/filters'
 import {addItemToCart} from '../redux/actions/cart'
+import { fetchPizzas } from '../redux/actions/pizzas';
 
 function Home() {
-  const dispatch = useDispatch()
   const categoryNames = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
-  const sortItems = [{name: 'Популярности', type: 'rating', order: 'desc'}, {name: 'Цене', type: 'prices', order: 'asc'}, {name: 'Алфавиту', type: 'name', order: 'asc'}]
-  const {groupedItems} = useSelector(({cart})=>cart)
-  const [pizzas, setPizzas ] = React.useState(null);
+const sortItems = [{name:'популярности', type:'rating', order: 'desc'},{name:'цене', type:'price', order: 'asc'},{name:'по алфавиту', type:'name', order: 'asc'}]
+
+  const dispatch = useDispatch()
+  const items = useSelector(({pizzas})=> pizzas.items)
+  const cartItems = useSelector(({cart})=> cart.items)
+  const onSelectCategory = React.useCallback(index=>{dispatch(setCategory(index))},[])
+  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { category, sortBy} = useSelector(({ filters }) => filters);
-    
-    
+  const {groupedItems} = useSelector(({cart})=>cart)
+  React.useEffect(() => {
+    dispatch(fetchPizzas(category, sortBy));
+  }, [category, sortBy]);
+  
  const sendToCart = (obj)=>{
    
    dispatch(addItemToCart(obj))
@@ -23,10 +30,9 @@ function Home() {
  const onSelectSortType = React.useCallback((type) => {
   dispatch(setSortBy(type));
 }, []) 
-    React.useEffect(()=>{axios.get(`/db.json`).then(({data})=>{setPizzas(data.pizzas)
-    })
-   
-  },[])
+
+
+
     return (
         <div className="container">
            <div className="content__top">
@@ -36,8 +42,8 @@ function Home() {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
             {
-      pizzas && (
-        pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj} onSendToCart={sendToCart}  addedCount={groupedItems[obj.id] && groupedItems[obj.id].groupedItems.length}/>)
+      items.pizzas && (
+        items.pizzas.map((obj)=><PizzaBlock key={obj.id} {...obj} onSendToCart={sendToCart}  addedCount={groupedItems[obj.id] && groupedItems[obj.id].groupedItems.length}/>)
       )
     }
             </div>
