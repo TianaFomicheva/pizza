@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import CartItem from '../components/CartItem'
+import cartEmptyImage from '../assets/img/empty-cart.png';
 import {plusCartItem, minusCartItem, removeCartItem, clearCart} from '../redux/actions/cart'
 
 function Cart() {
@@ -43,7 +44,7 @@ function Cart() {
                             </div>
                         </div>
           <div className="content__items">
-            { Object.values(items).map(item => <CartItem name={item['items'][0].name} size={item['items'][0].size} id={item['items'][0].id} uniq={item['items'][0].uniq} imageUrl={item['items'][0].imageUrl} key={item['items'][0].uniq} totalCount={item['items'].length} totalPrice={item.totalPrice}  onPlus={onPlusItem}
+            { Object.values(items).map(item => <CartItem name={item['items'][0].name} size={item['items'][0].size} type={item['items'][0].type} id={item['items'][0].id} uniq={item['items'][0].uniq} imageUrl={item['items'][0].imageUrl} key={item['items'][0].uniq} totalCount={item['items'].length} totalPrice={item.totalPrice}  onPlus={onPlusItem}
              onMinus={onMinusItem}   onRemove={onRemoveItem}                 />)}
           </div>
           
@@ -74,8 +75,7 @@ function Cart() {
                 Вероятней всего, вы не заказывали ещё пиццу.<br />
                 Для того, чтобы заказать пиццу, перейди на главную страницу.
               </p>
-              <img src="/img/empty-cart.png" alt="Empty cart" />
-
+              <img src={cartEmptyImage} alt="Empty cart" />
               <Link to="/">
                 <button className="button button--black">
                   <span>Вернуться назад</span>

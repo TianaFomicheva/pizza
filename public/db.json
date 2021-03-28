@@ -79,6 +79,26 @@
             "prices": [450, 480,550],
             "category": 4,
             "rating": 10
+          },
+          {
+            "id": 8,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/ec29465e-606b-4a04-a03e-da3940d37e0e.jpg",
+            "name": "Четыре сезона",
+            "types": [0, 1],
+            "sizes": [26, 30, 40],
+            "prices": [395, 435,485],
+            "category": 5,
+            "rating": 10
+          },
+          {
+            "id": 9,
+            "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/30367198-f3bd-44ed-9314-6f717960da07.jpg",
+            "name": "Овощи и грибы 🌱",
+            "types": [0, 1],
+            "sizes": [26, 30, 40],
+            "prices": [285, 310,360],
+            "category": 5,
+            "rating": 7
           }
     ]
 }

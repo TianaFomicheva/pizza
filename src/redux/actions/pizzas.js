@@ -5,52 +5,27 @@ export const setLoaded = payload => ({
     payload
 })
 
-export const fetchPizzas =(category, sortBy)=>(dispatch)=> {
- 
+export const fetchPizzas = (category, sortBy) => (dispatch) => {
+
     dispatch(setLoaded(false))
-    axios.get(`/db.json`).then(({data})=>{
-        console.log(data)
-if(category !== null){
-    let newarr = []
-    let newdata = {}
-    data['pizzas'].map(item=>{
-        if(item['category'] == category){
-            newarr.push(item)
-    }})
-    let sortRule = sortBy.type
-    if(sortBy.order == 'asc'){
+    axios.get(`/db.json`).then(({ data }) => {
+        
+        const sortProp = (a, type) => {
+            return (type === 'price') ? a['prices'][0] : a[type]
+        }
 
-        newarr.sort((a,b)=>a[sortRule] > b[sortRule] ? 1 :-1)
-    }else{
-        newarr.sort((a,b)=>a[sortRule] < b[sortRule] ? 1 :-1)
-    }
+        const sortByRule = (newarr, sortRule, order) => {
+            return (order === 'asc') ? (newarr.sort((a, b) => sortProp(a, sortRule) > sortProp(b, sortRule) ? 1 : -1)) : (newarr.sort((a, b) => sortProp(a, sortRule) < sortProp(b, sortRule) ? 1 : -1))
+        }
 
-    newdata['pizzas'] = newarr  
- 
-    dispatch(setPizzas(newdata))
-    
 
-}else{
-    let newarr = data['pizzas']
-    let newdata = {}
-    let sortRule = sortBy.type
-    if(sortBy.order == 'asc'){
+        dispatch(setPizzas({ pizzas: sortByRule(category ? data.pizzas.filter(item => item.category === category) : data.pizzas, sortBy.type, sortBy.order) }))
 
-        newarr.sort((a,b)=>a[sortRule] > b[sortRule] ? 1 :-1)
-    }else{
-        newarr.sort((a,b)=>a[sortRule] < b[sortRule] ? 1 :-1)
-    }
-    newdata['pizzas'] = newarr    
-    console.log(newdata)
-    dispatch(setPizzas(newdata))
-}
-
-    
-})
+    })
 
 }
-export const setPizzas =(items)=>({
+export const setPizzas = (items) => ({
     type: 'SET_PIZZAS',
     payload: items
-    })
+})
 

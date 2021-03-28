@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CartItem({id,name, size, totalCount, totalPrice, imageUrl, onPlus, onMinus, onRemove, uniq}) {
+function CartItem({id,name, size, type, totalCount, totalPrice, imageUrl, onPlus, onMinus, onRemove, uniq}) {
 
 const handleClickItemPlus = ()=>{
   onPlus(id, uniq)
@@ -23,7 +23,7 @@ const handleClickItemRemove = ()=>{
   </div>
   <div className="cart__item-info">
     <h3>{name}</h3>
-    <p>тонкое тесто, {size} см.</p>
+    <p>{type === 0 ? 'тонкое' : 'традиционное'} тесто, {size} см.</p>
   </div>
   <div className="cart__item-count">
     <div className="button button--outline button--circle cart__item-count-minus" onClick={handleClickItemMinus}>

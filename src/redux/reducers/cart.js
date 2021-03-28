@@ -63,7 +63,7 @@ const cart = (state = initialState, action)=>{
                   state.groupedItems[action.payload.id].groupedItems[0],
                 ];
                
-                console.log(newObjGroupedItems)
+
                 const newGroupedItems = {
                   ...state.groupedItems,
                   [action.payload.id]: {
@@ -124,12 +124,9 @@ const cart = (state = initialState, action)=>{
                 };
                 
                 let toDeleteUniqLength =  newItems[action.payload.uniq].items.length 
-                console.log(toDeleteUniqLength)
-                console.log(state.groupedItems[action.payload.id].groupedItems)
                 const newObjGroupedItems =      toDeleteUniqLength <  state.groupedItems[action.payload.id].groupedItems.length ?
                   state.groupedItems[action.payload.id].groupedItems.slice(parseInt(toDeleteUniqLength)) : false
 
-                console.log(newObjGroupedItems)  
              
                 delete newItems[action.payload.uniq];
                 

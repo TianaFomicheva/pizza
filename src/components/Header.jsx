@@ -1,4 +1,4 @@
-// import logo from '../assets/img/pizza-logo.svg';
+import logo from '../assets/img/pizza-logo.svg';
 
 import Button from './Button'
 import {Link} from 'react-router-dom'
@@ -12,7 +12,7 @@ function Header(){
         <div className="container">
         <Link to="/">
           <div className="header__logo">
-            {/* <img width="38" src={logo} alt="Pizza logo" /> */}
+            <img width="38" src={logo} alt="Pizza logo" />
             <div>
               <h1>Best Pizza</h1>
               <p>самая вкусная пицца во Вселенной</p>
